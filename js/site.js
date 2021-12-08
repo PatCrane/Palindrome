@@ -3,21 +3,32 @@ function handleInput(){
     document.getElementById("alert").classList.add("invisible");
     
     let userString = document.getElementById("userString").value;
+
+    let cleansedString = cleanString(userString);
     
-    if(userString == "") {
+    if(cleansedString == "") {
         
         alert("Please enter a string");
 
-    } else if (isPalindrome(userString) == true) {
+    } else if (isPalindrome(cleansedString) == true) {
 
-        palindromeSuccess(userString);
+        palindromeSuccess(cleansedString);
 
     } else {
 
-        palindromeFail(userString);
+        palindromeFail(cleansedString);
     }
     
 }
+
+function cleanString(userString) {
+
+    let output = userString.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').replace(/[0-9]/g, '').split(/\s/).join('').toLowerCase();
+
+    return output;
+
+}
+
 
 function reverseString(userString){
 
