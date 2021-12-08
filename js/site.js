@@ -6,19 +6,7 @@ function handleInput(){
 
     let cleansedString = cleanString(userString);
     
-    if(cleansedString == "") {
-        
-        alert("Please enter a string");
-
-    } else if (isPalindrome(cleansedString) == true) {
-
-        palindromeSuccess(cleansedString);
-
-    } else {
-
-        palindromeFail(cleansedString);
-    }
-    
+    displayResult(cleansedString);  
 }
 
 function cleanString(userString) {
@@ -29,18 +17,17 @@ function cleanString(userString) {
 
 }
 
+function reverseString(inputString){
 
-function reverseString(userString){
-
-    let revString = [];
+    let output = [];
     
-    for (let index = userString.length - 1; index >= 0 ; index--) {
+    for (let index = inputString.length - 1; index >= 0 ; index--) {
         
-        revString += userString[index];
+        output += inputString[index];
         
     }
 
-    return revString;
+    return output;
 }
 
 function isPalindrome(inputString) {
@@ -61,24 +48,30 @@ function isPalindrome(inputString) {
 
 }
 
-function palindromeFail(inputString){
+function displayResult(inputString) {
 
-    document.getElementById("alert-header").innerHTML = `Bummer`;
-    
-    document.getElementById("msg").innerHTML = `${inputString} is not a palindrome.`;
-    
-    document.getElementById("alert").classList.remove("invisible");
-    
-    document.getElementById("alert").classList.add("alert-danger");
-}
+    if(inputString == "") {
+        
+        alert("Please enter a string");
 
-function palindromeSuccess(inputString){
+    } else if (isPalindrome(inputString) == true) {
 
-    document.getElementById("alert-header").innerHTML = `Woot`;
+        document.getElementById("alert-header").innerHTML = `Woot`;
     
-    document.getElementById("msg").innerHTML = `${inputString} is a palindrome!`;
+        document.getElementById("msg").innerHTML = `${inputString} is a palindrome!`;
+        
+        document.getElementById("alert").classList.remove("invisible");
+        
+        document.getElementById("alert").classList.add("alert-success");
+
+    } else {
+
+        document.getElementById("alert-header").innerHTML = `Bummer`;
     
-    document.getElementById("alert").classList.remove("invisible");
-    
-    document.getElementById("alert").classList.add("alert-success");
+        document.getElementById("msg").innerHTML = `${inputString} is not a palindrome.`;
+        
+        document.getElementById("alert").classList.remove("invisible");
+        
+        document.getElementById("alert").classList.add("alert-danger");
+    }
 }
