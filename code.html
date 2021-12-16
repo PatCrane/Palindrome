@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
     <head>
-        <title>App Name: A Coding Project by Patrick Crane</title>
+        <title>Palindrome: A Coding Project by Patrick Crane</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,7 +23,7 @@
         <!-- === Nav Section === -->
         <nav class="navbar navbar-expand-md navbar-dark fixed-top ">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#"><img src="/img/logo-icon.png" class="" alt="Pat Crane Logo Icon" height="40"> App Name</a>
+                <a class="navbar-brand" href="/"><img src="/img/logo-icon.png" class="" alt="Pat Crane Logo Icon" height="40"> Palindrome</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -40,7 +40,7 @@
                             <a class="nav-link active" aria-current="page" href="code.html">The Code</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" target="_blank" href="#">Git Repo</a>
+                            <a class="nav-link" target="_blank" href="https://github.com/PatCrane/Palindrome">Git Repo</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" target="_blank" href="#">About</a>
@@ -52,22 +52,139 @@
         <!-- === Main Section === -->
         <main class="flex-shrink-0">
             <div class="container py-5 px-5 mt-5">
-                <h2 class="border-1 border-bottom border-dark">The Code for APP NAME.</h2>
+                <h2 class="border-1 border-bottom border-dark">The Code for Palindrome.</h2>
                 <div class="row row-cols-1 row-cols-lg-2">
                     <div class="col-lg-8">
                         <pre class="line-numbers">
                             <code class="language-javascript">
-                                //Call Hello World
-                                function helloWorld() {
-                                    alert("Hello World");
+                                function handleInput() {
+    
+                                    document.getElementById("alert").classList.add("invisible");
+                                    
+                                    let userString = document.getElementById("userString").value;
+                                
+                                    let cleansedString = cleanString(userString);
+                                    
+                                    displayResult(cleansedString);  
+                                }
+                                
+                                function cleanString(userString) {
+                                
+                                    let output = userString.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').replace(/[0-9]/g, '').split(/\s/).join('').toLowerCase();
+                                
+                                    return output;
+                                
+                                }
+                                
+                                function reverseString(inputString){
+                                
+                                    let output = [];
+                                    
+                                    for (let index = inputString.length - 1; index >= 0 ; index--) {
+                                        
+                                        output += inputString[index];
+                                        
+                                    }
+                                
+                                    return output;
+                                }
+                                
+                                function isPalindrome(inputString) {
+                                
+                                    let userString = inputString;
+                                
+                                    let revString = reverseString(userString);
+                                
+                                    if(userString == revString) {
+                                
+                                        return true;
+                                
+                                    } else {
+                                
+                                        return false;
+                                
+                                    }
+                                
+                                }
+                                
+                                function displayResult(inputString) {
+                                
+                                    if(inputString == "") {
+                                        
+                                        alert("Please enter a string");
+                                
+                                    } else if (isPalindrome(inputString) == true) {
+                                
+                                        document.getElementById("alert-header").innerHTML = `Woot`;
+                                    
+                                        document.getElementById("msg").innerHTML = `${inputString} is a palindrome!`;
+                                        
+                                        document.getElementById("alert").classList.remove("invisible");
+                                        
+                                        document.getElementById("alert").classList.add("alert-success");
+                                
+                                    } else {
+                                
+                                        document.getElementById("alert-header").innerHTML = `Bummer`;
+                                    
+                                        document.getElementById("msg").innerHTML = `${inputString} is not a palindrome.`;
+                                        
+                                        document.getElementById("alert").classList.remove("invisible");
+                                        
+                                        document.getElementById("alert").classList.add("alert-danger");
+                                    }
                                 }
                             </code>
                         </pre>
                     </div>
                     <div class="col-lg-4">
-                        <p>The Code is structured in one function</p>
-                        <h5>Hello World()</h5>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam maxime saepe tempora quisquam accusamus! Reprehenderit, placeat. Earum ab, nemo corrupti iure incidunt quis placeat perspiciatis sequi accusamus ipsam sint quam!</p>
+                        <p>The code is structured in five functions…</p>
+
+                        <h5>handleInput()</h5>
+
+                        <p>This acts as our “controller” method. On line 3, we add the Bootstrap “invisible” class to the result message which makes it not visible by default when the page loads.</p>
+
+                        <p>On line 5, we hook onto the value of the input field of the form in the “userString” variable.</p>
+
+                        <p>On line 7, we set a variable which invokes our “cleanString” function where we pass in the string the user typed in the input.</p>
+
+                        <p>Lastly, we invoke our “displayResult” function where we pass the “cleansedString” variable.</p>
+
+                        <h5>cleanString()</h5>
+
+                        <p>We could have put this function in our handleInput function but I thought it best to make this it’s own function so it can be tweaked later if needed. This basically takes in a string where we use Javascript’s built-in replace and split methods to get rid of special characters, numbers, spaces and capital letters. I cannot take credit for this. I basically strung together bits I found across the internet. Thanks Stack Overflow!</p>
+
+                        <h5>reverseString()</h5>
+
+                        <p>This is the method which reverses the user input string (passed into the function) to compare to the non-reversed string to verify the string is a palindrome (this part is handled in a separate function).</p>
+
+                        <p>On line 14, we set an empty array in our “output” variable.</p>
+
+                        <p>On line 24, we set up a for-loop like so…</p>
+
+                        <p>“index” starts at a number equal to the length of our inputstring minus one… “let index = inputstring.length -1”</p>
+
+                        <p>As long as “index” is greater than, or equal to zero, we decrement “index” by one…”index >= 0 ; index--” </p>
+
+                        <p>For each iteration, we add to our “output” array which builds our reversed string.</p>
+
+                        <p>Finally, on line 30 we return the “output” variable back out of the function</p>
+
+                        <h5>isPalindrome()</h5>
+
+                        <p>This is the heart of our little project. Checking to see if the user string is actually a palindrome. This function accepts a string which is basically our user input string and returns a boolean value.</p>
+
+                        <p>On line 37, we set a variable and invoke our reverseString() function passing in the “userString” variable.</p>
+
+                        <p>On lines 39 through 47 we make a simple comparison. If the reversed string is equal to our input string, return true. Otherwise, we return false.</p>
+
+                        <h5>displayResult()</h5>
+                        <p>This basically acts as our “view” function. On line 53, we do a simple check to ensure there is actually input and throw an alert at the user if there is none.</p>
+
+                        <p>On line 57, we invoke our “isPalindrome” function and check to see if the input string is indeed a palindrome. If it is, we hook into our message mark-up with a congratulatory message. On line 63 we also remove the Bootstrap “invisible” class and then on line 65 we add in the Bootstrap “alert-success” class to give us a nice satisfying success message. </p>
+
+                        <p>In our ELSE statement, we hook into our markup again. This time, we let the user know the text is NOT a palindrome. We also remove the invisible Bootstrap class like before. On line 75 we add the Boostrap “alert-danger” class to give us the dreaded red box of doom.</p>
+
                     </div>
                 </div>
 
